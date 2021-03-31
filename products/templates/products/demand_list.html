@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title  %} Items List {% endblock %}
+
+{% block content  %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    
+    {% for d in posts %}
+    <tbody>
+      <tr>
+        <th scope="row">{{ d.product.name }}</th>
+        <td>{{ d.price }}</td>
+        <td>{{d.quantity}}</td>
+        <td>{{d.date}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  {% include "products/pagination.html" with page=posts %}
+{% endblock %}

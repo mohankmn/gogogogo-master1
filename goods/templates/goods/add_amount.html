@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} add purchase{% endblock title %}
+
+{% block content %}  
+    <form method='POST' action="{% url 'goods:amount_form_url' %}" class="">
+        {% csrf_token %}
+                        
+        <div class="card">
+            <div class="card-header">Enter amount of each raw material required for each good</div>
+            <div class="card-body"> 
+                {% for a_good in all_goods %}
+                    <h5>{{a_good.good_name}}:</h5>
+                    {% if a_good.raw_material.all %}
+                        {% for a_raw in a_good.raw_material.all %}
+                            <label for="colFormLabel" class="col-sm-8 col-form-label">{{a_raw.name}}</label>
+                            {% for an_amount in all_Amount %}
+                                {% if an_amount.goods == a_good and an_amount.raw_mate == a_raw and an_amount.required_amount == 0%}
+                                    <input value="" type="number" class="col-sm-2" placeholder="units/unit of goods" name="{{a_good.good_name}} -> {{a_raw}}" required><br>
+                                    {{break}}
+                                {% elif an_amount.goods == a_good and an_amount.raw_mate == a_raw and an_amount.required_amount != 0%}
+                                    <input value="{{an_amount.required_amount}}" type="number" class="col-sm-2" placeholder="units/unit of goods" name="{{a_good.good_name}} -> {{a_raw}}" required><br>
+                                    {{break}}
+                                {% endif %}
+                            {% endfor %}                    
+                        {% endfor %}
+                        <br>
+                    {% else %}
+                        <h5 style="color:darkcyan;">no raw materials are entered for this good...</h5><br>
+                    {% endif %}
+                {% endfor %}
+
+                <input type="submit" class="btn btn-info" value='save'/>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

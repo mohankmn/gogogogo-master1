@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title  %} actual mean & variance {% endblock %}
+
+{% block content  %}
+    {% if df2 %}
+        {{df2|safe}}
+    {% endif %}
+    {% if error %}
+        {{error|safe}}
+    {% endif %}
+{% endblock %}

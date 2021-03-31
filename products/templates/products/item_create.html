@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Create Item</h1>
+    {% if product_message %}
+        <div class="ui success message">
+            <i class="close icon"></i>
+            <div class="header">{{ product_message }}</div>
+        </div>
+    {% endif %}
+    <br>
+    <br>
+    {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+          {{message}}
+        </div>
+    {%endfor%}
+    <form method='POST' action=''>
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" class="btn btn-info" value='Create'/>
+    </form>
+{% endblock %}

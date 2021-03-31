@@ -1,0 +1,72 @@
+{% extends 'base.html'%}
+
+{% block title %}chart{% endblock title %} 
+
+{% block content %} 
+    <div>
+        <div class="">
+
+            {% if request.POST %}
+                {% if graph %}
+                    <img src="data:image/png;base64, {{ graph | safe}}">
+                {% endif %}
+            {% endif %}
+
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}                
+            <div class="card">
+                <div class="card-header">Chart</div>
+                <div class="card-body">  
+                    <div class="form-group">
+                        <label for="inputState">Choose a chart type:</label>
+                        <select id="inputState" name="plot" class="form-control">
+                            <option selected>---------</option>
+                            <option value="bar">bar plot</option>
+                            <option value="line">line plot</option>
+                            <option value="count">count plot</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Raw material:</label><br>
+                        <input type="text" name="item" class="col-md-10">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Date from:</label>
+                            <input type="date" name="date_from">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Date to:</label>
+                            <input type="date" name="date_to">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div><br>
+                        
+            {% if error_message %}          
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{ error_message }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        </form>
+        <br>
+        <div class="card">
+            <div class="card-header">Raw materials</div>
+            <div class="card-body"> 
+                <div>
+                    {% for a in items %}
+                        {{a.name}}<br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div><br>
+    </div>
+{% endblock content %}

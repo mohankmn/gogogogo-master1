@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title %} upload usage data{% endblock title %}
+
+{% block content %} 
+    <u><h4>Usage data:</h4></u>
+    <br>
+    <h5 style="color: blue;">
+        <div class="card">
+            <div class="card-body">
+                Make sure all the items in the file are already uploaded into software......
+            </div>
+        </div>
+    </h5>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method='POST' action='' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </div>
+    </div>
+    <br>
+
+    {% if success_message %}          
+        <div class="alert alert-success" role="alert">
+            <strong>{{ success_message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    {% if error_message %}          
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ success_message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %} 
+{% endblock content %}

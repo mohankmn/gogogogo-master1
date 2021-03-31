@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title  %} Items List {% endblock %}
+
+{% block content  %}
+
+  {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+      {{message}}
+    </div>
+  {%endfor%}
+
+  <form method='POST' action=''>
+    {% csrf_token %}
+    {{form|crispy}}
+        <input type="submit" class="btn btn-info" value='Search'/>
+  </form>
+
+  <br>
+    <a href="{% url 'products:items_list_url' %}" class="btn btn-primary btn-lg " role="button" >Show all Items</a>
+    <a href="{% url 'products:item_create_url' %}" class="btn btn-secondary btn-lg "  role="button">Add new Item</a>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Inventory</th>
+          <th scope="col">EOQ</th>
+          <th scope="col">Reorder Quantity</th>
+        </tr>
+      </thead>
+
+      {% for item in items %}
+          <tbody>            
+            {% if item.total_inventory <= item.rq %}
+              <tr style="color: red;">
+                <th scope="row">{{ item.name }}</th>
+                <td>{{item.total_inventory}}</td>
+                <td>{{item.eoq}}</td>
+                <td>{{item.rq}}</td>
+                <td><a href="{% url 'products:update_item' item.id %}" class="btn btn-outline-secondary" role="button">Update</a></td>
+                <td><a href="{% url 'products:delete_items' item.id %}" class="btn btn-outline-danger" role="button">Delete</a></td>
+              </tr>         
+            {% endif %}
+          </tbody>
+      {% endfor %}
+
+      {% for item in items %}
+          <tbody>            
+            {% if item.total_inventory > item.rq %}
+              <tr>
+                <th scope="row">{{ item.name }}</th>
+                <td>{{item.total_inventory}}</td>
+                <td>{{item.eoq}}</td>
+                <td>{{item.rq}}</td>
+                <td><a href="{% url 'products:update_item' item.id %}" class="btn btn-outline-secondary" role="button">Update</a></td>
+                <td><a href="{% url 'products:delete_items' item.id %}" class="btn btn-outline-danger" role="button">Delete</a></td>
+              </tr>         
+            {% endif %}
+          </tbody>
+      {% endfor %}
+    </table>
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--meta http-equiv="X-UA-Compatible" content="ie=edge"-->
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--custom css-->
+    <!--script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script-->
+    <link rel="stylesheet" type="text/css" href = "c:/Users/Dell/Desktop/Inventory project/static_project/style.css">
+    
+    <title>
+      {% block title %}
+        Inventory Project
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <style>
+      .hello-msg{
+        font-size: 18px;
+        color: #fff;
+        margin-right: 20px;
+      }
+    </style>
+
+    {% if user.is_authenticated %}
+      <!--nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:demand_list_url' %}">History</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:items_list_url' %}">Inventory Data</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:add-purchase-view' %}">Add-records</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:calculations_url' %}">Analysis</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:main-products-view' %}">Upload & Analysis>>></a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'goods:goods_form_url' %}">Add Goods</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'goods:amount_form_url' %}">Add amount</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{% url 'products:items_list_url' %}" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Goods
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'goods:goods_form_url' %}">Add</a>
+                <a class="dropdown-item" href="#">Delete </a>
+                <a class="dropdown-item" href="{% url 'goods:amount_form_url' %}">Details form</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <span class="hello-msg">Welcome, {{request.user}}</span>
+        <span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+      </nav--> 
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Company</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto"> 
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:demand_list_url' %}">History</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:items_list_url' %}">Raw materials</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:add-purchase-view' %}">Add-records</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:calculations_url' %}">Analysis</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'products:main-products-view' %}">Charts</a></li>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'goods:goods_form_url' %}">Add</a>
+                <a class="dropdown-item" href="{% url 'goods:amount_form_url' %}">Details form</a>
+                <a class="dropdown-item" href="{% url 'goods:delete_goods_url' %}">Delete</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">upload</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'csvs:upload_view_product_url' %}">Raw materials</a>
+                <a class="dropdown-item" href="{% url 'csvs:upload_view_url' %}">Raw material usage</a>
+              </div>
+            </li>
+            <!--li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li-->
+          </ul>
+        </div>
+        <span style="color: darkblue;" class="hello-msg">Welcome {{request.user}}</span>
+        <span ><a style="color: red;" class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+      </nav>
+      {% endif %}
+
+      <div class="container mt-5">
+        <div class="row">
+          <!--div class="col-8 offset-md-2"-->
+            <div class="ui container">
+              {% block content %}
+                
+              {%  endblock %}
+            </div>
+          <!--/div-->
+        </div>
+      </div>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
